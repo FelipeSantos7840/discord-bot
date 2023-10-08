@@ -1,4 +1,4 @@
-package org.example.commands;
+package org.lumbot.commands;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;

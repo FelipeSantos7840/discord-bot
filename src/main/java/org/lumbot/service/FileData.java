@@ -1,4 +1,4 @@
-package org.example.service;
+package org.lumbot.service;
 
 import java.util.Objects;
 

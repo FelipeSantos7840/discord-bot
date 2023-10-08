@@ -1,11 +1,11 @@
-package org.example.application;
+package org.lumbot.application;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import org.example.application.servicebot.GenerateBotService;
-import org.example.service.ConfigCommandsService;
+import org.lumbot.application.servicebot.GenerateBotService;
+import org.lumbot.service.ConfigCommandsService;
 
 public class Main {
     public static void main(String[] args){

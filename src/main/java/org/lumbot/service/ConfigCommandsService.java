@@ -1,12 +1,12 @@
-package org.example.service;
+package org.lumbot.service;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import org.example.commands.CSetAiringAnimeChat;
-import org.example.commands.CSetHeadlineAnimeChat;
-import org.example.commands.ConfigCommands;
+import org.lumbot.commands.CSetAiringAnimeChat;
+import org.lumbot.commands.CSetHeadlineAnimeChat;
+import org.lumbot.commands.ConfigCommands;
 
 import java.util.ArrayList;
 import java.util.List;

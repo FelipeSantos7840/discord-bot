@@ -1,9 +1,9 @@
-package org.example.application;
+package org.lumbot.application;
 
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.example.commands.ConfigCommands;
+import org.lumbot.commands.ConfigCommands;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
