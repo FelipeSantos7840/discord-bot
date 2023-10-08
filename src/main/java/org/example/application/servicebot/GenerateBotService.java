@@ -5,6 +5,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.example.application.LumBot;
+import org.example.commands.ConfigCommands;
+import org.example.service.ConfigCommandsService;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -35,8 +37,8 @@ public class GenerateBotService {
         return list;
     }
 
-    private static List<ListenerAdapter> listenerAdapters(){
-        List<ListenerAdapter> list = Arrays.asList();
+    private static List<ConfigCommands> listenerAdapters(){
+        List<ConfigCommands> list = ConfigCommandsService.generateListListener();
         return list;
     }
 }
