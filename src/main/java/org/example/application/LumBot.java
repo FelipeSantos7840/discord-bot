@@ -17,7 +17,7 @@ public class LumBot {
     private List<GatewayIntent> gatewayIntents;
     private List<ConfigCommands> listerners;
     public LumBot(List<CacheFlag> cacheFlags, List<GatewayIntent> gatewayIntents, List<ConfigCommands> listerners) throws IOException {
-        String path = ("data/botToken.txt");
+        String path = ("data/botToken.lum");
         BufferedReader bfr = new BufferedReader(new FileReader(path));
         String line = bfr.readLine();
         if(line == null){

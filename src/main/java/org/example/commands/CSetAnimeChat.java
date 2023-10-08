@@ -1,6 +1,10 @@
 package org.example.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.InteractionHook;
+import org.example.service.DataFileService;
+
+import java.io.IOException;
 
 public class CSetAnimeChat extends ConfigCommands{
     @Override
@@ -9,7 +13,14 @@ public class CSetAnimeChat extends ConfigCommands{
             this.setGuild(event.getGuild());
             this.setTextChannel(event.getChannel().asTextChannel());
 
-            event.reply("Chat Centralizado!").queue();
+            try{
+                InteractionHook ih = event.getHook();
+                event.reply("Configurando Chat....").setEphemeral(true).queue();
+                DataFileService.setDefaultChat(getGuild(),getTextChannel());
+                ih.editOriginal("Chat Configurado!!").queue();
+            } catch (IOException e){
+                event.reply("Erro na Configuração do Chat contate o Suporte!").setEphemeral(true).queue();
+            }
         }
     }
 }
