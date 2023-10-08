@@ -3,6 +3,7 @@ package org.example.service;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import org.example.commands.CSetAnimeChat;
 import org.example.commands.ConfigCommands;
@@ -19,12 +20,12 @@ public class ConfigCommandsService {
 
     public static void updateCommands(Guild guild){
         guild.updateCommands().addCommands(
-                Commands.slash("setanimechat", "Define chat padrão para atualização de Animes!")).queue();
+                Commands.slash("setanimechat", "Define chat padrão para atualização de Animes!").setDefaultPermissions(DefaultMemberPermissions.DISABLED)).queue();
     }
 
     public static void updateCommands(JDA jda){
         jda.updateCommands().addCommands(
-                Commands.slash("setAnimeChat", "Define chat padrão para atualização de Animes!")).queue();
+                Commands.slash("setanimechat", "Define chat padrão para atualização de Animes!").setDefaultPermissions(DefaultMemberPermissions.DISABLED)).queue();
     }
 
 }
