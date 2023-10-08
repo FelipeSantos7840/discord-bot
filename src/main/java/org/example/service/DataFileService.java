@@ -13,7 +13,7 @@ public class DataFileService {
     private static final String pathChatGuilds = "data//chatGuilds.lum";
     public static void setDefaultChat(Guild guild, TextChannel textChannel) throws IOException{
         FileData updateDate = new FileData(guild.getId(),textChannel.getId());
-
+        verifyFile();
         List<FileData> listFileData = readGuildChats();
         boolean tmp = false;
         for(FileData data : listFileData){
@@ -41,6 +41,13 @@ public class DataFileService {
             }
         }
         return listGuildsChats;
+    }
+
+    private static void verifyFile() throws IOException{
+        File file = new File(pathChatGuilds);
+        if(!file.exists()){
+            file.createNewFile();
+        }
     }
 
     private static void appendGuildChats(Guild guild, TextChannel textChannel) throws IOException{
