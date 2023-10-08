@@ -1,7 +1,6 @@
 package org.example.application;
 
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
@@ -9,34 +8,60 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 public class LumBot {
     private String token;
     private List<CacheFlag> cacheFlags;
     private List<GatewayIntent> gatewayIntents;
-    private List<ListenerAdapter> listerners = new ArrayList<>();
-
-    public LumBot() throws IOException {
+    private List<ListenerAdapter> listerners;
+    public LumBot(List<CacheFlag> cacheFlags, List<GatewayIntent> gatewayIntents, List<ListenerAdapter> listerners) throws IOException {
         String path = ("data/botToken.txt");
         BufferedReader bfr = new BufferedReader(new FileReader(path));
         String line = bfr.readLine();
         if(line == null){
             throw new IOException("Bot sem Token informado!");
         }
+        this.cacheFlags = cacheFlags;
+        this.gatewayIntents = gatewayIntents;
+        this.listerners = listerners;
+
         this.token = line;
-        cacheFlags = Arrays.asList(CacheFlag.ACTIVITY,CacheFlag.ROLE_TAGS);
-        gatewayIntents = Arrays.asList(GatewayIntent.MESSAGE_CONTENT,GatewayIntent.GUILD_MEMBERS);
     }
 
     public String getToken() {
         return token;
     }
 
-    public List<ListenerAdapter> getListerners(){
+    public List<CacheFlag> getCacheFlags() {
+        return cacheFlags;
+    }
+
+    public void addCacheFlags(CacheFlag cacheFlags) {
+        this.cacheFlags.add(cacheFlags);
+    }
+
+    public List<GatewayIntent> getGatewayIntents() {
+        return gatewayIntents;
+    }
+
+    public void addGatewayIntents(GatewayIntent gatewayIntents) {
+        this.gatewayIntents.add(gatewayIntents);
+    }
+
+    public List<ListenerAdapter> getListerners() {
         return listerners;
     }
 
+    public void addListerners(ListenerAdapter listerners) {
+        this.listerners.add(listerners);
+    }
+
+    public JDABuilder builder(){
+        JDABuilder lumBuilder = JDABuilder.createDefault(this.token,gatewayIntents);
+        lumBuilder.enableCache(cacheFlags);
+        //lumBuilder.addEventListeners(listerners);
+        return lumBuilder;
+    }
 }
