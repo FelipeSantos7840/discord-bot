@@ -14,10 +14,10 @@ public class CSetAnimeChat extends ConfigCommands{
             this.setTextChannel(event.getChannel().asTextChannel());
 
             try{
-                InteractionHook ih = event.getHook();
+                InteractionHook interactionHook = event.getHook();
                 event.reply("Configurando Chat....").setEphemeral(true).queue();
                 DataFileService.setDefaultChat(getGuild(),getTextChannel());
-                ih.editOriginal("Chat Configurado!!").queue();
+                interactionHook.editOriginal("Chat Configurado!!").queue();
             } catch (IOException e){
                 event.reply("Erro na Configuração do Chat contate o Suporte!").setEphemeral(true).queue();
             }

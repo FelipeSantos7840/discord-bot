@@ -10,11 +10,10 @@ import java.util.List;
 
 public class DataFileService {
 
-    private static final String pathChatGuilds = "data//chatGuilds.lum";
-    public static void setDefaultChat(Guild guild, TextChannel textChannel) throws IOException{
+    public static void setDefaultChat(Guild guild, TextChannel textChannel,String pathChatGuilds) throws IOException{
         FileData updateDate = new FileData(guild.getId(),textChannel.getId());
-        verifyFile();
-        List<FileData> listFileData = readGuildChats();
+        verifyFile(pathChatGuilds);
+        List<FileData> listFileData = readGuildChats(pathChatGuilds);
         boolean tmp = false;
         for(FileData data : listFileData){
             if(updateDate.getGuildId().equals(data.getGuildId())){
@@ -22,13 +21,13 @@ public class DataFileService {
             }
         }
         if(tmp) {
-            updateGuildChats(guild, textChannel, listFileData);
+            updateGuildChats(guild, textChannel, pathChatGuilds, listFileData);
         }else{
-            appendGuildChats(guild, textChannel);
+            appendGuildChats(guild, textChannel, pathChatGuilds);
         }
     }
 
-    public static List<FileData> readGuildChats() throws IOException{
+    public static List<FileData> readGuildChats(String pathChatGuilds) throws IOException{
         List<FileData> listGuildsChats = new ArrayList<>();
         try(BufferedReader bfr = new BufferedReader(new FileReader(pathChatGuilds))){
 
@@ -43,21 +42,21 @@ public class DataFileService {
         return listGuildsChats;
     }
 
-    private static void verifyFile() throws IOException{
+    private static void verifyFile(String pathChatGuilds) throws IOException{
         File file = new File(pathChatGuilds);
         if(!file.exists()){
             file.createNewFile();
         }
     }
 
-    private static void appendGuildChats(Guild guild, TextChannel textChannel) throws IOException{
+    private static void appendGuildChats(Guild guild, TextChannel textChannel,String pathChatGuilds) throws IOException{
         try(BufferedWriter bfw = new BufferedWriter(new FileWriter(pathChatGuilds,true))){
             FileData file = new FileData(guild.getId(),textChannel.getId());
             bfw.append(file.toString());
         }
     }
 
-    private static void updateGuildChats(Guild guild, TextChannel textChannel, List<FileData> datas) throws IOException{
+    private static void updateGuildChats(Guild guild, TextChannel textChannel, String pathChatGuilds,List<FileData> datas) throws IOException{
         try(BufferedWriter bfw = new BufferedWriter(new FileWriter(pathChatGuilds))){
             FileData updateFileData = new FileData(guild.getId(),textChannel.getId());
             for(FileData files : datas){
