@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import org.lumbot.application.servicebot.GenerateBotService;
+import org.lumbot.collector.service.TimerCollectorRSS;
 import org.lumbot.service.ConfigCommandsService;
 
 public class Main {
@@ -16,9 +17,12 @@ public class Main {
             JDA jda = lumBot.build();
             try{
                 jda.awaitReady();
-                //ConfigCommandsService.updateCommands(jda.getGuilds().get(0));
-                ConfigCommandsService.removeCommands(jda.getGuilds().get(0));
+                ConfigCommandsService.updateCommands(jda.getGuilds().get(0));
+                //ConfigCommandsService.removeCommands(jda.getGuilds().get(0));
                 //ConfigCommandsService.updateCommands(jda);
+                //ConfigCommandsService.removeCommands(jda);
+
+                TimerCollectorRSS.timerStart();
 
             } catch (InterruptedException e){
                 e.printStackTrace();
