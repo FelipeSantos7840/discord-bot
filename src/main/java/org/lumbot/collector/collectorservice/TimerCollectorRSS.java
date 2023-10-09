@@ -1,4 +1,4 @@
-package org.lumbot.collector.service;
+package org.lumbot.collector.collectorservice;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

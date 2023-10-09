@@ -6,7 +6,7 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
-import org.lumbot.collector.service.FileCollectorRSS;
+import org.lumbot.collector.collectorservice.FileCollectorRSS;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

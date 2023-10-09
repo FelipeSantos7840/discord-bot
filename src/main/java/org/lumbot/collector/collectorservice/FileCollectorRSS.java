@@ -1,4 +1,4 @@
-package org.lumbot.collector.service;
+package org.lumbot.collector.collectorservice;
 
 import org.lumbot.collector.TypeRSS;
 
