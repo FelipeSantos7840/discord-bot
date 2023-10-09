@@ -24,13 +24,6 @@ public final class TimerCollectorRSS {
 
             boolean verifyHead = headlineCollector.collectAndProcessRSS("https://www.livechart.me/feeds/headlines");
 
-            if(verifyHead){
-                System.out.println("------------------------------------");
-                for(DataRSS teste : headlineCollector.dataList){
-                    System.out.println(teste);
-                }
-            }
-
         },0,2, TimeUnit.HOURS);
     }
 }

@@ -44,11 +44,8 @@ public class CollectorRSS {
         SyndFeed feed = CollectorRSS.getFeed(url);
 
         LocalDateTime lastPublishTime = LocalDateTime.ofInstant(feed.getPublishedDate().toInstant(), ZoneId.of("America/Sao_Paulo"));
-        System.out.println("1");
         boolean validate = verifyModification(lastPublishTime);
-        System.out.println("2");
         if(validate){
-            System.out.println("3");
             List<SyndEntry> entryList = feed.getEntries();
             List<DataRSS> datas = new ArrayList<>();
             for(SyndEntry entry : entryList){
@@ -56,11 +53,9 @@ public class CollectorRSS {
                 SyndEnclosure sde = entry.getEnclosures().get(0);
                 datas.add(new DataRSS(entry.getTitle(),pubTime,sde.getUrl(),entry.getLink()));
             }
-            System.out.println("4");
             List<DataRSS> list = new ArrayList<>();
             String lastData = FileCollectorRSS.getLastDataReceived(type);
             if(lastData != null){
-                System.out.println("5");
                 boolean entry = true;
                 int x=0;
                 for(DataRSS newData : datas){
@@ -76,7 +71,6 @@ public class CollectorRSS {
                 FileCollectorRSS.setLastDataReceived(type,list.get(0));
                 this.dataList = list;
             } else {
-                System.out.println("6");
                 FileCollectorRSS.setLastDataReceived(type,datas.get(0));
                 this.dataList = datas;
             }
