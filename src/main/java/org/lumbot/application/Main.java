@@ -22,7 +22,7 @@ public class Main {
                 //ConfigCommandsService.updateCommands(jda);
                 //ConfigCommandsService.removeCommands(jda);
 
-                TimerCollectorRSS.timerStart();
+                //TimerCollectorRSS.timerStart();
 
             } catch (InterruptedException e){
                 e.printStackTrace();

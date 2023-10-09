@@ -13,7 +13,8 @@ public class FileCollectorRSS {
         if(!file.exists()){
             try{
                file.createNewFile();
-               return LocalDateTime.parse("1999-01-01");
+               setLastPubSend(type,LocalDateTime.parse("1999-01-01T00:00:00"));
+               return LocalDateTime.parse("1999-01-01T00:00:00");
             } catch (IOException e){
                 System.out.println("Erro ao criar arquivo!");
                 e.printStackTrace();
@@ -22,7 +23,7 @@ public class FileCollectorRSS {
         try(BufferedReader bfr = new BufferedReader(new FileReader(path))){
             String line = bfr.readLine();
             if(line == null){
-                return LocalDateTime.parse("1999-01-01");
+                return LocalDateTime.parse("1999-01-01T00:00:00");
             } else {
                 return LocalDateTime.parse(line);
             }
@@ -30,7 +31,7 @@ public class FileCollectorRSS {
             System.out.println(e.getLocalizedMessage());
             e.printStackTrace();
         } catch (DateTimeParseException e){
-            System.out.println("Data em Formato Incorreto!");
+            System.out.println(e.getLocalizedMessage());
             e.printStackTrace();
         }
         throw new IllegalStateException("Arquivo com Erro!");

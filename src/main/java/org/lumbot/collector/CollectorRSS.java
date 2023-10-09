@@ -18,7 +18,6 @@ import java.util.List;
 
 public class CollectorRSS {
     private TypeRSS type;
-    private LocalDateTime lastModify;
     private List<DataRSS> dataList;
 
     public CollectorRSS(TypeRSS type) {
@@ -61,7 +60,8 @@ public class CollectorRSS {
 
     public boolean verifyModification(LocalDateTime lastPublishTime){
         LocalDateTime regPubTime = FileCollectorRSS.getLastPubSend(type);
-        if(!regPubTime.isBefore(lastPublishTime)){
+
+        if(regPubTime.isBefore(lastPublishTime)){
             FileCollectorRSS.setLastPubSend(type,lastPublishTime);
             return false;
         }
