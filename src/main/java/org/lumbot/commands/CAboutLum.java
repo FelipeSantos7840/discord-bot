@@ -11,20 +11,29 @@ public class CAboutLum extends ConfigCommands{
             this.setTextChannel(event.getChannel().asTextChannel());
 
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Testando Embeds!");
-            eb.setDescription("Embed criando exclusivamente para testes de funcionalidade!");
-            eb.addField("Teste Primario #1","Teste Primario",true);
-            eb.addField("Teste Primario #2","Teste Primario",true);
-            eb.addField("Teste Secundario #1","Teste Secundario",false);
-            eb.addField("Teste Terceiro #1","Teste Terceiro",false);
-            eb.addBlankField(true);
-            eb.setImage("https://thumbs2.imgbox.com/ae/0f/fKsJ6lsW_t.jpg");
+            eb.setTitle("Olá, Eu soa a Lum!");
+            eb.setDescription(embedDescrption());
+            eb.addField("Como funciona?","Em um chat pré-definido disponibilizo noticiais e atualizações de lançamentos " +
+                    "dos animes da temporada!",false);
+            eb.addField("Visualizar Código:","O meu código está disponvel para estudo e análise no link:\nhttps://github.com/FelipeSantos7840/lum-bot",false);
+            eb.addField("Principais Comandos:","",false);
+            eb.addField("Set Airing Chat:","Define chat que receberá atualizações de episódios",true);
+            eb.addField("Set Headline Chat:","Define chat que receberá notícias de animes e lançamentos",true);
             eb.setThumbnail("https://thumbs2.imgbox.com/ae/0f/fKsJ6lsW_t.jpg");
-            eb.setFooter("Teste do Pé");
-            eb.setAuthor("Felipe Dos Santos");
+            eb.setImage("https://thumbs2.imgbox.com/ae/0f/fKsJ6lsW_t.jpg");
+            eb.setFooter("=D");
             eb.setColor(100);
 
             event.replyEmbeds(eb.build()).queue();
         }
+    }
+
+    private StringBuilder embedDescrption(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Olá! Eu sou a Lum, uma aplicação ");
+        sb.append("código aberto de notícias e atualizações ");
+        sb.append("do mundo dos Animes!");
+
+        return sb;
     }
 }
