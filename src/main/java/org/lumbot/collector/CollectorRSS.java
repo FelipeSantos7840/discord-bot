@@ -32,7 +32,7 @@ public class CollectorRSS {
             SyndFeed feed = input.build(new XmlReader(feedUrl));
 
             LocalDateTime lastPublishTime = LocalDateTime.ofInstant(feed.getPublishedDate().toInstant(), ZoneId.of("America/Sao_Paulo"));
-            boolean validate = verifyMModification(lastPublishTime);
+            boolean validate = verifyModification(lastPublishTime);
 
             if(validate){
                 List<SyndEntry> entryList = feed.getEntries();
@@ -59,9 +59,10 @@ public class CollectorRSS {
         return false;
     }
 
-    public boolean verifyMModification(LocalDateTime lastPublishTime){
+    public boolean verifyModification(LocalDateTime lastPublishTime){
         LocalDateTime regPubTime = FileCollectorRSS.getLastPubSend(type);
         if(!regPubTime.isBefore(lastPublishTime)){
+            FileCollectorRSS.setLastPubSend(type,lastPublishTime);
             return false;
         }
         return true;

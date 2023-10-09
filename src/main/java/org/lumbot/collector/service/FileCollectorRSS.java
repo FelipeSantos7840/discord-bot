@@ -2,10 +2,7 @@ package org.lumbot.collector.service;
 
 import org.lumbot.collector.TypeRSS;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -37,5 +34,18 @@ public class FileCollectorRSS {
             e.printStackTrace();
         }
         throw new IllegalStateException("Arquivo com Erro!");
+    }
+
+    public static void setLastPubSend(TypeRSS type,LocalDateTime ldt){
+        String path = "data//lasPub" +type+".lum";
+        File file = new File(path);
+        try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))){
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            bfw.write(ldt.toString());
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
