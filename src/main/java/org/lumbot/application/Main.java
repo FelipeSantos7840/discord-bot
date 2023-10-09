@@ -16,7 +16,10 @@ public class Main {
             JDA jda = lumBot.build();
             try{
                 jda.awaitReady();
-                ConfigCommandsService.updateCommands(jda.getGuilds().get(0));
+                //ConfigCommandsService.updateCommands(jda.getGuilds().get(0));
+                ConfigCommandsService.removeCommands(jda.getGuilds().get(0));
+                //ConfigCommandsService.updateCommands(jda);
+
             } catch (InterruptedException e){
                 e.printStackTrace();
             }

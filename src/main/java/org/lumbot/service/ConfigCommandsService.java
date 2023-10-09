@@ -37,4 +37,12 @@ public class ConfigCommandsService {
         ).queue();
     }
 
+    public static void removeCommands(Guild guild){
+        guild.updateCommands().queue();
+    }
+
+    public static void removeCommands(JDA jda){
+        jda.updateCommands().queue();
+    }
+
 }
