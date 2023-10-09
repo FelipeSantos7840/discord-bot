@@ -1,5 +1,6 @@
 package org.lumbot.collector.collectorservice;
 
+import org.lumbot.collector.DataRSS;
 import org.lumbot.collector.TypeRSS;
 
 import java.io.*;
@@ -8,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public class FileCollectorRSS {
     public static LocalDateTime getLastPubSend(TypeRSS type){
-        String path = "data//lasPub" +type+".lum";
+        String path = "data//att//lastPub" +type+".lum";
         File file = new File(path);
         if(!file.exists()){
             try{
@@ -38,7 +39,7 @@ public class FileCollectorRSS {
     }
 
     public static void setLastPubSend(TypeRSS type,LocalDateTime ldt){
-        String path = "data//lasPub" +type+".lum";
+        String path = "data//att//lastPub" +type+".lum";
         File file = new File(path);
         try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))){
             if(!file.exists()){
@@ -48,5 +49,37 @@ public class FileCollectorRSS {
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static void setLastDataReceived(TypeRSS type, DataRSS data){
+        String path = "data//att//lastData" +type+".lum";
+        File file = new File(path);
+        try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))){
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            bfw.write(data.toString());
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static String getLastDataReceived(TypeRSS type){
+        String path = "data//att//lastData" +type+".lum";
+        File file = new File(path);
+        try{
+            if(!file.exists()){
+                file.createNewFile();
+            }
+        } catch (IOException e){
+            System.out.println(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+        try (BufferedReader bfw = new BufferedReader(new FileReader(file))){
+            return bfw.readLine();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        throw new IllegalStateException("Arquivo em Estado Incorreto!");
     }
 }

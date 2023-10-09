@@ -2,6 +2,7 @@ package org.lumbot.collector;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class DataRSS {
 
@@ -55,6 +56,19 @@ public class DataRSS {
 
     @Override
     public String toString() {
-        return "NoToString";
+        return this.title + " - " + this.pubDate.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DataRSS dataRSS = (DataRSS) o;
+        return Objects.equals(title, dataRSS.title) && Objects.equals(pubDate, dataRSS.pubDate) && Objects.equals(url, dataRSS.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, pubDate, url);
     }
 }
