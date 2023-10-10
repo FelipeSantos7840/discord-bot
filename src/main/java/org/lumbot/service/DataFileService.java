@@ -27,7 +27,7 @@ public class DataFileService {
         }
     }
 
-    public static List<FileData> readGuildChats(String pathChatGuilds) throws IOException{
+    public static List<FileData> readGuildChats(String pathChatGuilds){
         List<FileData> listGuildsChats = new ArrayList<>();
         try(BufferedReader bfr = new BufferedReader(new FileReader(pathChatGuilds))){
 
@@ -38,6 +38,8 @@ public class DataFileService {
                 listGuildsChats.add(new FileData(tmp[0],tmp[1]));
                 line = bfr.readLine();
             }
+        } catch (IOException e){
+            System.out.println("Arquivo Não Encontrado!");
         }
         return listGuildsChats;
     }

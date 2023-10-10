@@ -8,39 +8,35 @@ import org.lumbot.collector.TypeRSS;
 import org.lumbot.service.DataFileService;
 import org.lumbot.service.FileData;
 
+import java.awt.*;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class LumRSSService {
     public static void sendDataRSS(TypeRSS type,JDA jda, List<DataRSS> data){
-        try{
-            if(data == null){
-                return;
+        if(data == null){
+            return;
+        }
+        List<FileData> fileDataList = DataFileService.readGuildChats("data//chat"+type+".lum");
+        if(fileDataList.isEmpty()){
+            return;
+        }
+        for(FileData fileData : fileDataList){
+            for(DataRSS dataRSS : data){
+                fileData.sendMessage(jda,buildEmbed(dataRSS));
             }
-            List<FileData> fileDataList = DataFileService.readGuildChats("data//chat"+type+".lum");
-            if(fileDataList.isEmpty()){
-                return;
-            }
-            for(FileData fileData : fileDataList){
-                for(DataRSS dataRSS : data){
-                    fileData.sendMessage(jda,buildEmbed(dataRSS));
-                }
-            }
-        } catch (IOException e){
-            System.out.println(e.getLocalizedMessage());
-            e.printStackTrace();
         }
     }
 
     private static MessageEmbed buildEmbed(DataRSS data){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH/mm/ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle(data.getTitle());
         eb.setDescription("Data de Lançamento: " + data.getPubDate().format(dtf));
         eb.setFooter(data.getUrl());
         eb.setImage(data.getMedia());
-        eb.setColor(35);
+        eb.setColor(new Color(50, 210, 69));
         return eb.build();
     }
 }

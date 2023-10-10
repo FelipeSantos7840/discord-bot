@@ -8,14 +8,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class FileCollectorRSS {
+
+    private static void validateDirectory(File file) throws IOException{
+        File pasta = new File(file.getParent());
+        if(!pasta.exists()){
+            pasta.mkdir();
+        }
+        file.createNewFile();
+    }
     public static LocalDateTime getLastPubSend(TypeRSS type){
         String path = "data//att//lastPub" +type+".lum";
         File file = new File(path);
         if(!file.exists()){
             try{
-               file.createNewFile();
-               setLastPubSend(type,LocalDateTime.parse("1999-01-01T00:00:00"));
-               return LocalDateTime.parse("1999-01-01T00:00:00");
+                validateDirectory(file);
+                setLastPubSend(type,LocalDateTime.parse("1999-01-01T00:00:00"));
+                return LocalDateTime.parse("1999-01-01T00:00:00");
             } catch (IOException e){
                 System.out.println("Erro ao criar arquivo!");
                 e.printStackTrace();
@@ -42,9 +50,7 @@ public class FileCollectorRSS {
         String path = "data//att//lastPub" +type+".lum";
         File file = new File(path);
         try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))){
-            if(!file.exists()){
-                file.createNewFile();
-            }
+            validateDirectory(file);
             bfw.write(ldt.toString());
         } catch (IOException e){
             e.printStackTrace();
@@ -55,9 +61,7 @@ public class FileCollectorRSS {
         String path = "data//att//lastData" +type+".lum";
         File file = new File(path);
         try (BufferedWriter bfw = new BufferedWriter(new FileWriter(file))){
-            if(!file.exists()){
-                file.createNewFile();
-            }
+            validateDirectory(file);
             bfw.write(data.toString());
         } catch (IOException e){
             e.printStackTrace();
@@ -68,9 +72,7 @@ public class FileCollectorRSS {
         String path = "data//att//lastData" +type+".lum";
         File file = new File(path);
         try{
-            if(!file.exists()){
-                file.createNewFile();
-            }
+            validateDirectory(file);
         } catch (IOException e){
             System.out.println(e.getLocalizedMessage());
             e.printStackTrace();
