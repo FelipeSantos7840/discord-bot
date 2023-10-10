@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CollectorRSS {
     private TypeRSS type;
-    public List<DataRSS> dataList;
+    public List<DataRSS> dataList = new ArrayList<>();
 
     public CollectorRSS(TypeRSS type) {
         this.type = type;
@@ -48,17 +48,23 @@ public class CollectorRSS {
         SyndFeed feed = CollectorRSS.getFeed(url);
 
         LocalDateTime lastPublishTime = LocalDateTime.ofInstant(feed.getPublishedDate().toInstant(), ZoneId.of("America/Sao_Paulo"));
+        System.out.println("Log: Verificando Modificações!");
         boolean validate = verifyModification(lastPublishTime);
+
         if(validate){
+            System.out.println("Log: Modificações Encontradas");
             List<SyndEntry> entryList = feed.getEntries();
             List<DataRSS> datas = new ArrayList<>();
+            System.out.println("Log: Coletando Dados");
             for(SyndEntry entry : entryList){
                 LocalDateTime pubTime = LocalDateTime.ofInstant(entry.getPublishedDate().toInstant(), ZoneId.of("America/Sao_Paulo"));
                 SyndEnclosure sde = entry.getEnclosures().get(0);
                 datas.add(new DataRSS(entry.getTitle(),pubTime,sde.getUrl(),entry.getLink()));
             }
+            System.out.println("Log: Dados coletados - " + datas.size());
             List<DataRSS> list = new ArrayList<>();
             String lastData = FileCollectorRSS.getLastDataReceived(type);
+            System.out.println("Log: Iniciando processo de validação de mensagem!");
             if(lastData != null){
                 boolean entry = true;
                 int x=0;
@@ -79,6 +85,7 @@ public class CollectorRSS {
             }
             return true;
         }
+        System.out.println("Log: Modificações não encontradas!");
         return false;
     }
 
