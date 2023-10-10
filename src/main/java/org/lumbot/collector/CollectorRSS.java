@@ -24,6 +24,10 @@ public class CollectorRSS {
         this.type = type;
     }
 
+    public TypeRSS getType() {
+        return type;
+    }
+
     public static SyndFeed getFeed(String url){
         try{
             URL feedUrl = new URL(url);
@@ -59,7 +63,6 @@ public class CollectorRSS {
                 boolean entry = true;
                 int x=0;
                 for(DataRSS newData : datas){
-
                     if(newData.toString().equals(lastData)){
                         break;
                     }

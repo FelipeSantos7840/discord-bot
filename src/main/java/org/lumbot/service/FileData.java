@@ -1,5 +1,11 @@
 package org.lumbot.service;
 
+
+
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+
 import java.util.Objects;
 
 public class FileData {
@@ -25,6 +31,10 @@ public class FileData {
 
     public void setTextChatId(String textChatId) {
         this.textChatId = textChatId;
+    }
+
+    public void sendMessage(JDA jda, MessageEmbed messageEmbed){
+        jda.getGuildById(this.guildId).getTextChannelById(this.textChatId).sendMessageEmbeds(messageEmbed).queue();
     }
 
     @Override
