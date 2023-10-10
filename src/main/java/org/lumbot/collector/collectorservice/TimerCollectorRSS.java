@@ -25,10 +25,14 @@ public final class TimerCollectorRSS {
             airingCollector.collectAndProcessRSS("https://www.livechart.me/feeds/episodes");
             headlineCollector.collectAndProcessRSS("https://www.livechart.me/feeds/headlines");
 
+            System.out.println("Log: Lista formado com tamanho: " + airingCollector.dataList.size());
+            System.out.println("Log: Lista formado com tamanho: " + airingCollector.dataList.size());
+
             LumRSSService.sendDataRSS(headlineCollector.getType(),jda,headlineCollector.dataList);
             LumRSSService.sendDataRSS(airingCollector.getType(),jda,airingCollector.dataList);
 
+            System.out.println("Log: Finalizado Consulta!");
 
-        },0,2, TimeUnit.HOURS);
+        },0,1, TimeUnit.HOURS);
     }
 }
