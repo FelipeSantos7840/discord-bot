@@ -11,9 +11,9 @@ public class CAboutLum extends ConfigCommands{
             this.setTextChannel(event.getChannel().asTextChannel());
 
             EmbedBuilder eb = new EmbedBuilder();
-            eb.setTitle("Olá, Eu soa a Lum!");
+            eb.setTitle("Olá, Eu sou a Lum!");
             eb.setDescription(embedDescrption());
-            eb.addField("Como funciona?","Em um chat pré-definido disponibilizo noticiais e atualizações de lançamentos " +
+            eb.addField("Como funciona?","Em um chat pré-definido disponibilizo notícias e atualizações de lançamentos " +
                     "dos animes da temporada!",false);
             eb.addField("Visualizar Código:","O meu código está disponvel para estudo e análise no link:\nhttps://github.com/FelipeSantos7840/lum-bot",false);
             eb.addField("Principais Comandos:","",false);

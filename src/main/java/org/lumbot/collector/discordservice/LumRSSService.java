@@ -23,8 +23,8 @@ public class LumRSSService {
             return;
         }
         for(FileData fileData : fileDataList){
-            for(DataRSS dataRSS : data){
-                fileData.sendMessage(jda,buildEmbed(dataRSS));
+            for(int x = data.size()-1;x>=0;x--){
+                fileData.sendMessage(jda,buildEmbed(data.get(x)));
             }
         }
     }
