@@ -27,12 +27,12 @@ public class GenerateBotService {
     }
 
     private static List<GatewayIntent> gatewayIntents(){
-        List<GatewayIntent> list = Arrays.asList(GatewayIntent.MESSAGE_CONTENT,GatewayIntent.DIRECT_MESSAGES,GatewayIntent.GUILD_PRESENCES);
+        List<GatewayIntent> list = Arrays.asList();
         return list;
     }
 
     private static List<CacheFlag> cacheFlags(){
-        List<CacheFlag> list = Arrays.asList(CacheFlag.ACTIVITY);
+        List<CacheFlag> list = Arrays.asList(CacheFlag.ACTIVITY,CacheFlag.VOICE_STATE,CacheFlag.EMOJI,CacheFlag.STICKER);
         return list;
     }
 

@@ -60,7 +60,7 @@ public class LumBot {
 
     public JDABuilder builder(){
         JDABuilder lumBuilder = JDABuilder.createDefault(this.token,gatewayIntents);
-        lumBuilder.enableCache(cacheFlags);
+        lumBuilder.disableCache(cacheFlags);
 
         lumBuilder.addEventListeners(listerners.toArray());
         return lumBuilder;
