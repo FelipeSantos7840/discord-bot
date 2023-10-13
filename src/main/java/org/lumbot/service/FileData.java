@@ -3,10 +3,11 @@ package org.lumbot.service;
 
 
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
+import java.util.List;
 import java.util.Objects;
 
 public class FileData {
@@ -34,10 +35,10 @@ public class FileData {
         this.textChatId = textChatId;
     }
 
-    public void sendMessage(JDA jda, MessageEmbed messageEmbed){
+    public void sendMessage(JDA jda, MessageEmbed messageEmbed, List<Button> buttonList){
         TextChannel textChannel = jda.getGuildById(this.guildId).getTextChannelById(textChatId);
         if(textChannel != null){
-            textChannel.sendMessageEmbeds(messageEmbed).queue();
+            textChannel.sendMessageEmbeds(messageEmbed).addActionRow(buttonList).queue();
         }
     }
 
