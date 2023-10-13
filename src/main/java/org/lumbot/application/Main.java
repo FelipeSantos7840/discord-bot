@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args){
         JDABuilder lumBot = GenerateBotService.provideLum();
         if(lumBot != null){
-            lumBot.setActivity(Activity.playing("Mortal Kombat 1"));
+            lumBot.setActivity(Activity.listening("/helplum && /aboutlum"));
             lumBot.setStatus(OnlineStatus.ONLINE);
             JDA jda = lumBot.build();
             try{
