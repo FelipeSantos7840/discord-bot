@@ -44,6 +44,7 @@ public class LumRSSService {
 
     private static List<Button> buildButton(DataRSS data){
         List<Button> buttons = new ArrayList<>();
+        buttons.add(Button.primary("priority","Acompanhar"));
         buttons.add(Button.link(data.getUrl(),"Anime Site"));
         return buttons;
     }
