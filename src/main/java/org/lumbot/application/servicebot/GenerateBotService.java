@@ -1,6 +1,7 @@
 package org.lumbot.application.servicebot;
 
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.lumbot.application.LumBot;
@@ -36,8 +37,8 @@ public class GenerateBotService {
         return list;
     }
 
-    private static List<ConfigCommands> listenerAdapters(){
-        List<ConfigCommands> list = ConfigCommandsService.generateListListener();
+    private static List<ListenerAdapter> listenerAdapters(){
+        List<ListenerAdapter> list = ConfigCommandsService.generateListListener();
         return list;
     }
 }

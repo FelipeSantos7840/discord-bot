@@ -1,6 +1,7 @@
 package org.lumbot.application;
 
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.lumbot.commands.ConfigCommands;
@@ -15,8 +16,8 @@ public class LumBot {
     private String token;
     private List<CacheFlag> cacheFlags;
     private List<GatewayIntent> gatewayIntents;
-    private List<ConfigCommands> listerners;
-    public LumBot(List<CacheFlag> cacheFlags, List<GatewayIntent> gatewayIntents, List<ConfigCommands> listerners) throws IOException {
+    private List<ListenerAdapter> listerners;
+    public LumBot(List<CacheFlag> cacheFlags, List<GatewayIntent> gatewayIntents, List<ListenerAdapter> listerners) throws IOException {
         String path = ("data/botToken.lum");
         BufferedReader bfr = new BufferedReader(new FileReader(path));
         String line = bfr.readLine();
@@ -50,7 +51,7 @@ public class LumBot {
         this.gatewayIntents.add(gatewayIntents);
     }
 
-    public List<ConfigCommands> getListerners() {
+    public List<ListenerAdapter> getListerners() {
         return listerners;
     }
 

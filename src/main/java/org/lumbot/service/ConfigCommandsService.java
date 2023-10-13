@@ -2,22 +2,24 @@ package org.lumbot.service;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import org.lumbot.commands.CAboutLum;
 import org.lumbot.commands.CSetAiringAnimeChat;
 import org.lumbot.commands.CSetHeadlineAnimeChat;
-import org.lumbot.commands.ConfigCommands;
+import org.lumbot.events.EButtonInteract;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigCommandsService {
-    public static List<ConfigCommands> generateListListener (){
-        List<ConfigCommands> list = new ArrayList<>();
+    public static List<ListenerAdapter> generateListListener (){
+        List<ListenerAdapter> list = new ArrayList<>();
         list.add(new CSetAiringAnimeChat());
         list.add(new CSetHeadlineAnimeChat());
         list.add(new CAboutLum());
+        list.add(new EButtonInteract());
         return list;
     }
 
