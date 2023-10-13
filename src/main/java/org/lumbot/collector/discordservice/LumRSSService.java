@@ -25,7 +25,7 @@ public class LumRSSService {
         }
         for(FileData fileData : fileDataList){
             for(int x = data.size()-1;x>=0;x--){
-                List<Button> buttonList = buildButton(data.get(x));
+                List<Button> buttonList = buildButton(data.get(x),type);
                 MessageEmbed messageEmbed = buildEmbed(data.get(x));
                 fileData.sendMessage(jda,messageEmbed,buttonList);
             }
@@ -42,10 +42,14 @@ public class LumRSSService {
         return eb.build();
     }
 
-    private static List<Button> buildButton(DataRSS data){
+    private static List<Button> buildButton(DataRSS data,TypeRSS type){
         List<Button> buttons = new ArrayList<>();
-        buttons.add(Button.primary("priority","Acompanhar"));
-        buttons.add(Button.link(data.getUrl(),"Anime Site"));
+        if(type == TypeRSS.AIRING){
+            buttons.add(Button.primary("priority","Acompanhar"));
+            buttons.add(Button.link(data.getUrl(),"Acessar Anime"));
+        } else {
+            buttons.add(Button.link(data.getUrl(),"Acessar Notícia"));
+        }
         return buttons;
     }
 }
