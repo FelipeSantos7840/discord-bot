@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import org.lumbot.application.servicebot.GenerateBotService;
 import org.lumbot.collector.collectorservice.TimerCollectorRSS;
-import org.lumbot.service.ConfigCommandsService;
 
 public class Main {
     public static void main(String[] args){
