@@ -20,12 +20,12 @@
 - [Comandos](#comandos)
 - [Licença](#licença)
 
-### Sobre
+## Sobre
 A Lum é um projeto independente com o objetivo de fornecer atualizações em tempo real dos episódios semanais de animes, além de divulgar notícias sobre novos anúncios em canais predefinidos pelo administrador do servidor. Priorizamos a simplicidade e funcionalidade em nossa abordagem.
 
 Nossos dados são atualmente coletados diretamente do feed RSS disponibilizado pela [LiveChart](www.livechart.me) e processados em nossa implementação. É importante observar que a [LiveChart](www.livechart.me) **NÃO** tem **envolvimento** ou **responsabilidade** na implementação da Lum. 👏
 
-### Uso
+## Uso
 A Lum está atualmente disponível publicamente para uso em qualquer servidor por meio deste [link](https://discord.com/api/oauth2/authorize?client_id=1160392363240341606&permissions=826781428752&scope=bot). Após a adição ao servidor, o administrador precisará utilizar dois [comandos](#comandos) para definir os canais onde as atualizações de episódios e anúncios serão divulgados. Esses canais podem ser os mesmos, se assim preferir.
 
 Depois de configurado o bot retornará as mensagens no chat contendo os seguintes dados:
@@ -41,7 +41,7 @@ Depois de configurado o bot retornará as mensagens no chat contendo os seguinte
   - Imagem
   - Link
 
-### Comandos
+## Comandos
 + **/setairingchat**:
   - Este comando destina-se exclusivamente aos usuários com permissões de Administrador no servidor e tem como finalidade informar à Lum qual chat do servidor receberá as atualizações dos episódios!
   - O chat em que o comando for executado será registrado para receber as mensagens através de seu ID.
@@ -51,7 +51,7 @@ Depois de configurado o bot retornará as mensagens no chat contendo os seguinte
 + **/aboutlum**:
   - Este comando está liberado para todos os usuários do servidor e retorna uma mensagem comentando sobre a Lum e seus objetivos!
 
-### Licença
+## Licença
 Esse projeto foi desenvolvido utilizando a [licença MIT](LICENSE).
 
 Importante informar que Dependencias utilizadas no projeto utilizam suas próprias licenças, refletindo diretamente em restrições na Adição, Alteração e Uso do código fonte da Lum se necessário.
