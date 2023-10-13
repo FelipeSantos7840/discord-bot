@@ -23,7 +23,7 @@
 ### Sobre
 A Lum é um projeto independente com o objetivo de fornecer atualizações em tempo real dos episódios semanais de animes, além de divulgar notícias sobre novos anúncios em canais predefinidos pelo administrador do servidor. Priorizamos a simplicidade e funcionalidade em nossa abordagem.
 
-Nossos dados são atualmente coletados diretamente do feed RSS disponibilizado pela [LiveChat](www.livechart.me) e processados em nossa implementação. É importante observar que a [LiveChat](www.livechart.me) **NÃO** tem **envolvimento** ou **responsabilidade** na implementação da Lum. 👏
+Nossos dados são atualmente coletados diretamente do feed RSS disponibilizado pela [LiveChart](www.livechart.me) e processados em nossa implementação. É importante observar que a [LiveChart](www.livechart.me) **NÃO** tem **envolvimento** ou **responsabilidade** na implementação da Lum. 👏
 
 ### Uso
 A Lum está atualmente disponível publicamente para uso em qualquer servidor por meio deste [link](https://discord.com/api/oauth2/authorize?client_id=1160392363240341606&permissions=826781428752&scope=bot). Após a adição ao servidor, o administrador precisará utilizar dois [comandos](#comandos) para definir os canais onde as atualizações de episódios e anúncios serão divulgados. Esses canais podem ser os mesmos, se assim preferir.
