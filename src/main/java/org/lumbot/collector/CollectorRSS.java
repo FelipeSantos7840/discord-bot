@@ -53,9 +53,11 @@ public class CollectorRSS {
         if(validate){
             List<SyndEntry> entryList = feed.getEntries();
             List<DataRSS> datas = new ArrayList<>();
+            LocalDateTime pubTime;
+            SyndEnclosure sde;
             for(SyndEntry entry : entryList){
-                LocalDateTime pubTime = LocalDateTime.ofInstant(entry.getPublishedDate().toInstant(), ZoneId.of("America/Sao_Paulo"));
-                SyndEnclosure sde = entry.getEnclosures().get(0);
+                pubTime = LocalDateTime.ofInstant(entry.getPublishedDate().toInstant(), ZoneId.of("America/Sao_Paulo"));
+                sde = entry.getEnclosures().get(0);
                 datas.add(new DataRSS(entry.getTitle(),pubTime,sde.getUrl(),entry.getLink()));
             }
             List<DataRSS> list = new ArrayList<>();

@@ -33,6 +33,7 @@ public final class TimerCollectorRSS {
                 LumRSSService.sendDataRSS(headlineCollector.getType(),jda,headlineCollector.dataList);
             }
             System.out.println("Log: Finalizando Consulta!");
-        },0,1, TimeUnit.HOURS);
+
+        },0,30, TimeUnit.MINUTES);
     }
 }

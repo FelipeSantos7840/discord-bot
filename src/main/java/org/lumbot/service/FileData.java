@@ -36,7 +36,7 @@ public class FileData {
     }
 
     public void sendMessage(JDA jda, MessageEmbed messageEmbed, List<Button> buttonList){
-        TextChannel textChannel = jda.getGuildById(this.guildId).getTextChannelById(textChatId);
+        TextChannel textChannel = jda.getTextChannelById(textChatId);
         if(textChannel != null){
             textChannel.sendMessageEmbeds(messageEmbed).addActionRow(buttonList).queue();
         }

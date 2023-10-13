@@ -23,10 +23,14 @@ public class LumRSSService {
         if(fileDataList.isEmpty()){
             return;
         }
+
+        List<Button> buttonList;
+        MessageEmbed messageEmbed;
+
         for(FileData fileData : fileDataList){
             for(int x = data.size()-1;x>=0;x--){
-                List<Button> buttonList = buildButton(data.get(x),type);
-                MessageEmbed messageEmbed = buildEmbed(data.get(x));
+                buttonList = buildButton(data.get(x),type);
+                messageEmbed = buildEmbed(data.get(x));
                 fileData.sendMessage(jda,messageEmbed,buttonList);
             }
         }

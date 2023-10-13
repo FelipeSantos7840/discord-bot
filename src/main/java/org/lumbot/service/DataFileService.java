@@ -32,9 +32,9 @@ public class DataFileService {
         try(BufferedReader bfr = new BufferedReader(new FileReader(pathChatGuilds))){
 
             String line = bfr.readLine();
-
+            String[] tmp;
             while (line != null) {
-                String[] tmp = line.split(",");
+                tmp = line.split(",");
                 listGuildsChats.add(new FileData(tmp[0],tmp[1]));
                 line = bfr.readLine();
             }
