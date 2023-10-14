@@ -12,14 +12,12 @@ public class FileManager {
         file.createNewFile();
     }
 
-    protected static void verifyFile(String pathChatGuilds) throws IOException{
+    protected static boolean verifyFile(String pathChatGuilds) throws IOException{
         File file = new File(pathChatGuilds);
-        if(!file.exists()){
-            file.createNewFile();
-        }
+        return file.createNewFile();
     }
 
-    protected static void verifyFile(File file) throws IOException{
-        verifyFile(file.getPath());
+    protected static boolean verifyFile(File file) throws IOException{
+        return verifyFile(file.getPath());
     }
 }

@@ -42,6 +42,18 @@ public class FileData {
         }
     }
 
+    public void sendMessage(JDA jda, MessageEmbed messageEmbed, List<Button> buttonList,List<PriorityData> pds){
+        TextChannel textChannel = jda.getTextChannelById(textChatId);
+        StringBuilder stringBuilder = new StringBuilder();
+        if(textChannel != null){
+            for(PriorityData pd : pds){
+                stringBuilder.append(pd.getUserMentioned()+" ");
+            }
+            textChannel.sendMessage(stringBuilder.toString()).queue();
+            textChannel.sendMessageEmbeds(messageEmbed).addActionRow(buttonList).queue();
+        }
+    }
+
     @Override
     public String toString() {
         return guildId + "," + textChatId + "\n";

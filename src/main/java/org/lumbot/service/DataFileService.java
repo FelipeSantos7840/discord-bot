@@ -1,8 +1,10 @@
 package org.lumbot.service;
 
+import com.rometools.utils.IO;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import org.lumbot.collector.TypeRSS;
 
 
 import java.io.*;
@@ -65,7 +67,7 @@ public class DataFileService extends FileManager {
         }
     }
 
-    public static void setUserPriority(String userMentioned,String guildID,String animeID) throws IOException{
+    public static void appendUserPriority(String userMentioned,String guildID,String animeID) throws IOException{
         File file = new File("data//CommandsText//PriorityAnimes//"+animeID+".lum");
         validateDirectory(file);
         verifyFile(file);
@@ -74,7 +76,7 @@ public class DataFileService extends FileManager {
         }
     }
 
-    private static List<String> readFilePriority(File file){
+    public static List<String> readFilePriority(File file){
         List<String> strings = new ArrayList<>();
         try(BufferedReader bfr = new BufferedReader(new FileReader(file))){
             String line = bfr.readLine();
@@ -90,5 +92,33 @@ public class DataFileService extends FileManager {
             System.out.println("Arquivo de Prioridade Não Encontrado!");
         }
         return strings;
+    }
+
+    public static List<PriorityData> readFilePriority(String animeID) {
+        String path = "data//CommandsText//PriorityAnimes//"+animeID+".lum";
+        List<PriorityData> priorityList= new ArrayList<>();
+        try(BufferedReader bfr = new BufferedReader(new FileReader(path))) {
+            String line = bfr.readLine();
+            String[] split;
+            while(line != null){
+                split = line.split(",");
+                priorityList.add(new PriorityData(split[0],split[1]));
+                line = bfr.readLine();
+            }
+        } catch (IOException e){
+            System.out.println("Leitura de Prioridade Invalida!");
+        }
+        return priorityList;
+    }
+
+    public static boolean verifyPriority(String animeID, TypeRSS type){
+        if(type != TypeRSS.AIRING){
+            return false;
+        }
+        File file = new File("data//CommandsText//PriorityAnimes//"+animeID+".lum");
+        if(!file.exists()){
+            return false;
+        }
+        return true;
     }
 }

@@ -8,6 +8,7 @@ import org.lumbot.collector.DataRSS;
 import org.lumbot.collector.TypeRSS;
 import org.lumbot.service.DataFileService;
 import org.lumbot.service.FileData;
+import org.lumbot.service.PriorityData;
 
 import java.awt.Color;
 import java.time.format.DateTimeFormatter;
@@ -28,11 +29,30 @@ public class LumRSSService {
         List<Button> buttonList;
         MessageEmbed messageEmbed;
         Collections.reverse(data);
+        String urlData;
+        List<PriorityData> priorityList = new ArrayList<>();
+        List<PriorityData> priorityGuildData = new ArrayList<>();
         for(DataRSS unitDataRSS : data){
+            urlData = unitDataRSS.getUrl().substring(31);
+            if(DataFileService.verifyPriority(urlData,type)){
+                priorityList = DataFileService.readFilePriority(urlData);
+            }
             buttonList = buildButton(unitDataRSS,type);
             messageEmbed = buildEmbed(unitDataRSS);
             for(FileData fileData : fileDataList){
-                fileData.sendMessage(jda,messageEmbed,buttonList);
+                priorityGuildData.clear();
+                for(PriorityData pd : priorityList){
+                    if(pd.getGuildID().hashCode() == fileData.getGuildId().hashCode()){
+                        if(pd.getGuildID().equals(fileData.getGuildId())){
+                            priorityGuildData.add(pd);
+                        }
+                    }
+                }
+                if(priorityGuildData.isEmpty()){
+                    fileData.sendMessage(jda,messageEmbed,buttonList);
+                } else {
+                    fileData.sendMessage(jda,messageEmbed,buttonList,priorityGuildData);
+                }
             }
         }
     }

@@ -18,7 +18,7 @@ public class EButtonInteract extends ConfigEvents{
             String animeID = eventMessage.getButtons().get(1).getUrl().substring(31);
 
             try {
-                DataFileService.setUserPriority(eventUser.getAsMention(),event.getGuild().getId(),animeID);
+                DataFileService.appendUserPriority(eventUser.getAsMention(),event.getGuild().getId(),animeID);
                 event.reply(eventUser.getAsMention() + ", você está seguindo "+
                     eventMessage.getEmbeds().get(0).getTitle().split("#")[0] +"agora! 👀").setEphemeral(true).queue();
             } catch (IOException e){
