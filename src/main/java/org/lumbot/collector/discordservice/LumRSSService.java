@@ -12,6 +12,7 @@ import org.lumbot.service.FileData;
 import java.awt.Color;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LumRSSService {
@@ -26,11 +27,11 @@ public class LumRSSService {
 
         List<Button> buttonList;
         MessageEmbed messageEmbed;
-
-        for(FileData fileData : fileDataList){
-            for(int x = data.size()-1;x>=0;x--){
-                buttonList = buildButton(data.get(x),type);
-                messageEmbed = buildEmbed(data.get(x));
+        Collections.reverse(data);
+        for(DataRSS unitDataRSS : data){
+            buttonList = buildButton(unitDataRSS,type);
+            messageEmbed = buildEmbed(unitDataRSS);
+            for(FileData fileData : fileDataList){
                 fileData.sendMessage(jda,messageEmbed,buttonList);
             }
         }
