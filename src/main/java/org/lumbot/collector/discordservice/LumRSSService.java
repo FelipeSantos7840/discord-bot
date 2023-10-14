@@ -50,7 +50,7 @@ public class LumRSSService {
     private static List<Button> buildButton(DataRSS data,TypeRSS type){
         List<Button> buttons = new ArrayList<>();
         if(type == TypeRSS.AIRING){
-            buttons.add(Button.primary("priority","Acompanhar"));
+            buttons.add(Button.primary("priority","👀 Seguir"));
             buttons.add(Button.link(data.getUrl(),"Acessar Anime"));
         } else {
             buttons.add(Button.link(data.getUrl(),"Acessar Notícia"));

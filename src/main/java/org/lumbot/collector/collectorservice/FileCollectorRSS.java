@@ -2,20 +2,13 @@ package org.lumbot.collector.collectorservice;
 
 import org.lumbot.collector.DataRSS;
 import org.lumbot.collector.TypeRSS;
+import org.lumbot.service.FileManager;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-public class FileCollectorRSS {
-
-    private static void validateDirectory(File file) throws IOException{
-        File pasta = new File(file.getParent());
-        if(!pasta.exists()){
-            pasta.mkdir();
-        }
-        file.createNewFile();
-    }
+public class FileCollectorRSS extends FileManager {
     public static LocalDateTime getLastPubSend(TypeRSS type){
         String path = "data//att//lastPub" +type+".lum";
         File file = new File(path);

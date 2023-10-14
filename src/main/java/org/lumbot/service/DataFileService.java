@@ -1,6 +1,7 @@
 package org.lumbot.service;
 
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 
@@ -8,7 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataFileService {
+public class DataFileService extends FileManager {
 
     public static void setDefaultChat(Guild guild, TextChannel textChannel,String pathChatGuilds) throws IOException{
         FileData updateDate = new FileData(guild.getId(),textChannel.getId());
@@ -44,13 +45,6 @@ public class DataFileService {
         return listGuildsChats;
     }
 
-    private static void verifyFile(String pathChatGuilds) throws IOException{
-        File file = new File(pathChatGuilds);
-        if(!file.exists()){
-            file.createNewFile();
-        }
-    }
-
     private static void appendGuildChats(Guild guild, TextChannel textChannel,String pathChatGuilds) throws IOException{
         try(BufferedWriter bfw = new BufferedWriter(new FileWriter(pathChatGuilds,true))){
             FileData file = new FileData(guild.getId(),textChannel.getId());
@@ -69,5 +63,32 @@ public class DataFileService {
                 }
             }
         }
+    }
+
+    public static void setUserPriority(String userMentioned,String guildID,String animeID) throws IOException{
+        File file = new File("data//CommandsText//PriorityAnimes//"+animeID+".lum");
+        validateDirectory(file);
+        verifyFile(file);
+        try(BufferedWriter bfw = new BufferedWriter(new FileWriter(file,true))){
+            bfw.write(userMentioned+","+guildID+"\n");
+        }
+    }
+
+    private static List<String> readFilePriority(File file){
+        List<String> strings = new ArrayList<>();
+        try(BufferedReader bfr = new BufferedReader(new FileReader(file))){
+            String line = bfr.readLine();
+            if(line == null){
+                return strings;
+            }
+            while(line != null){
+                strings.add(line);
+                line = bfr.readLine();
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Arquivo de Prioridade Não Encontrado!");
+        }
+        return strings;
     }
 }
