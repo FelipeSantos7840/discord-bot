@@ -71,12 +71,28 @@ public class DataFileService extends FileManager {
         File file = new File("data//CommandsText//PriorityAnimes//"+animeID+".lum");
         validateDirectory(file);
         verifyFile(file);
+        if(verifyDuplicateUser(userMentioned,guildID,file)){
+            throw new IllegalStateException("você já está acompanhando esse anime!");
+        }
         try(BufferedWriter bfw = new BufferedWriter(new FileWriter(file,true))){
             bfw.write(userMentioned+","+guildID+"\n");
         }
     }
 
-    public static List<String> readFilePriority(File file){
+    private static boolean verifyDuplicateUser(String userMentioned,String guildID, File file){
+        boolean tmp = false;
+        List<String> priorityList = readFilePriority(file);
+        for(String priority : priorityList){
+            if(priority.hashCode() == (userMentioned +","+guildID).hashCode()){
+                if(priority.equals(userMentioned +","+guildID)){
+                    tmp = true;
+                }
+            }
+        }
+        return tmp;
+    }
+
+    private static List<String> readFilePriority(File file){
         List<String> strings = new ArrayList<>();
         try(BufferedReader bfr = new BufferedReader(new FileReader(file))){
             String line = bfr.readLine();
