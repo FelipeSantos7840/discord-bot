@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import org.lumbot.commands.CAboutLum;
+import org.lumbot.commands.CHelpLum;
 import org.lumbot.commands.CSetAiringAnimeChat;
 import org.lumbot.commands.CSetHeadlineAnimeChat;
 import org.lumbot.events.EButtonInteract;
@@ -20,6 +21,7 @@ public class ConfigCommandsService {
         list.add(new CSetHeadlineAnimeChat());
         list.add(new CAboutLum());
         list.add(new EButtonInteract());
+        list.add(new CHelpLum());
         return list;
     }
 
@@ -27,7 +29,8 @@ public class ConfigCommandsService {
         guild.updateCommands().addCommands(
                 Commands.slash("setairingchat", "Define chat de envio dos Lançamentos!!").setDefaultPermissions(DefaultMemberPermissions.DISABLED),
                 Commands.slash("setheadlinechat", "Define chat de envio das Notícias!!").setDefaultPermissions(DefaultMemberPermissions.DISABLED),
-                Commands.slash("aboutlum", "Conheça Lum!!").setDefaultPermissions(DefaultMemberPermissions.ENABLED)
+                Commands.slash("aboutlum", "Conheça Lum!!").setDefaultPermissions(DefaultMemberPermissions.ENABLED),
+                Commands.slash("helplum", "Apresenta os comandos disponíveis da Lum!!!").setDefaultPermissions(DefaultMemberPermissions.ENABLED)
         ).queue();
     }
 
@@ -35,7 +38,8 @@ public class ConfigCommandsService {
         jda.updateCommands().addCommands(
                 Commands.slash("setairingchat", "Define chat padrão para atualização de Animes!!").setDefaultPermissions(DefaultMemberPermissions.DISABLED),
                 Commands.slash("setheadlinechat", "Define chat de envio das Notícias!!").setDefaultPermissions(DefaultMemberPermissions.DISABLED),
-                Commands.slash("aboutlum", "Conheça Lum!!").setDefaultPermissions(DefaultMemberPermissions.ENABLED)
+                Commands.slash("aboutlum", "Conheça Lum!!").setDefaultPermissions(DefaultMemberPermissions.ENABLED),
+                Commands.slash("helplum", "Apresenta os comandos disponíveis da Lum!!!").setDefaultPermissions(DefaultMemberPermissions.ENABLED)
         ).queue();
     }
 
