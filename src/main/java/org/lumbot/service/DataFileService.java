@@ -79,6 +79,34 @@ public class DataFileService extends FileManager {
         }
     }
 
+    private static void updateUserPriority(List<PriorityData> priorityList,String animeID) throws IOException{
+        File file = new File("data//CommandsText//PriorityAnimes//"+animeID+".lum");
+        try(BufferedWriter bfw = new BufferedWriter(new FileWriter(file))){
+            if(!priorityList.isEmpty()){
+                for(PriorityData pd : priorityList){
+                    bfw.write(pd.getUserMentioned()+","+pd.getGuildID()+"\n");
+                }
+            } else {
+                bfw.close();
+                file.delete();
+            }
+        }
+    }
+
+    public static void removeUserPriority(String userMentioned,String guildID,String animeID) throws IOException{
+        List<PriorityData> listPriority = readFilePriority(animeID);
+        for(PriorityData priority : listPriority){
+            if(priority.getGuildID().hashCode() == guildID.hashCode() && priority.getUserMentioned().hashCode() == userMentioned.hashCode()){
+                if(priority.getGuildID().equals(guildID) && priority.getUserMentioned().equals(userMentioned)) {
+                    listPriority.remove(priority);
+                    updateUserPriority(listPriority,animeID);
+                    return;
+                }
+            }
+        }
+        throw new IllegalStateException(", você não está seguindo esse anime!");
+    }
+
     private static boolean verifyDuplicateUser(String userMentioned,String guildID, File file){
         boolean tmp = false;
         List<String> priorityList = readFilePriority(file);
@@ -136,5 +164,12 @@ public class DataFileService extends FileManager {
             return false;
         }
         return true;
+    }
+
+    public static boolean verifyPriority(String animeID){
+        if(verifyPriority(animeID,TypeRSS.AIRING)){
+            return true;
+        }
+        throw new IllegalStateException(", você não está seguindo esse anime!");
     }
 }

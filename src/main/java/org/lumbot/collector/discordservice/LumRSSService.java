@@ -64,6 +64,7 @@ public class LumRSSService {
         eb.setDescription("Data de Lançamento: " + data.getPubDate().format(dtf));
         eb.setImage(data.getMedia());
         eb.setColor(new Color(50, 210, 69));
+        eb.setFooter("AnimeID: "+data.getUrl().substring(31));
         return eb.build();
     }
 
