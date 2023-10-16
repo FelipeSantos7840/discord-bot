@@ -50,6 +50,11 @@ Depois de configurado o bot retornará as mensagens no chat contendo os seguinte
   - O chat em que o comando for executado será registrado para receber as mensagens através de seu ID.
 + **/aboutlum**:
   - Este comando está liberado para todos os usuários do servidor e retorna uma mensagem comentando sobre a Lum e seus objetivos!
++ **/helplum**:
+  - Este comando está liberado para todos os usuários do servidor e retorna uma mensagem apresentando todos os comandos disponíveis da Lum!
++ **/remove animeid**:
+  - Este comando está liberado para todos os usuários do servidor.
+  - Permite que o usuário remova um anime que estiver seguindo semanalmente através do animeID.
 
 ## Licença
 Esse projeto foi desenvolvido utilizando a [licença MIT](LICENSE).
