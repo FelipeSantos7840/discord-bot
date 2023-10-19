@@ -3,7 +3,7 @@
     <td>
       <h1>Lum Discord Bot </h1>
       <p>A Lum é um bot Java para Discord projetado para fornecer atualizações em tempo real de episódios e anúncios do mundo dos animes diretamente no seu servidor Discord.<p>
-      <p>Adicione em seu Servidor: <a href="https://discord.com/api/oauth2/authorize?client_id=1160392363240341606&permissions=826781428752&scope=bot">Lum</a></p>
+      <p>Adicione em seu Servidor: <a href="https://discord.com/api/oauth2/authorize?client_id=1160392363240341606&permissions=224256&scope=bot">Lum</a></p>
     </td>
     <td align="right">
       <img src="https://thumbs2.imgbox.com/ce/c7/GQCA2kyR_t.jpg" alt="Logo do AniBot">
@@ -26,7 +26,7 @@ A Lum é um projeto independente com o objetivo de fornecer atualizações em te
 Nossos dados são atualmente coletados diretamente do feed RSS disponibilizado pela [LiveChart](www.livechart.me) e processados em nossa implementação. É importante observar que a [LiveChart](www.livechart.me) **NÃO** tem **envolvimento** ou **responsabilidade** na implementação da Lum. 👏
 
 ## Uso
-A Lum está atualmente disponível publicamente para uso em qualquer servidor por meio deste [link](https://discord.com/api/oauth2/authorize?client_id=1160392363240341606&permissions=826781428752&scope=bot). Após a adição ao servidor, o administrador precisará utilizar dois [comandos](#comandos) para definir os canais onde as atualizações de episódios e anúncios serão divulgados. Esses canais podem ser os mesmos, se assim preferir.
+A Lum está atualmente disponível publicamente para uso em qualquer servidor por meio deste [link](https://discord.com/api/oauth2/authorize?client_id=1160392363240341606&permissions=224256&scope=bot). Após a adição ao servidor, o administrador precisará utilizar dois [comandos](#comandos) para definir os canais onde as atualizações de episódios e anúncios serão divulgados. Esses canais podem ser os mesmos, se assim preferir.
 
 Depois de configurado o bot retornará as mensagens no chat contendo os seguintes dados:
 + Atualização de Episódios:
@@ -50,6 +50,11 @@ Depois de configurado o bot retornará as mensagens no chat contendo os seguinte
   - O chat em que o comando for executado será registrado para receber as mensagens através de seu ID.
 + **/aboutlum**:
   - Este comando está liberado para todos os usuários do servidor e retorna uma mensagem comentando sobre a Lum e seus objetivos!
++ **/helplum**:
+  - Este comando está liberado para todos os usuários do servidor e retorna uma mensagem apresentando todos os comandos disponíveis da Lum!
++ **/remove animeid**:
+  - Este comando está liberado para todos os usuários do servidor.
+  - Permite que o usuário remova um anime que estiver seguindo semanalmente através do animeID.
 
 ## Licença
 Esse projeto foi desenvolvido utilizando a [licença MIT](LICENSE).
