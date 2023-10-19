@@ -38,7 +38,7 @@ public class LumRSSService {
                 priorityList = DataFileService.readFilePriority(urlData);
             }
             buttonList = buildButton(unitDataRSS,type);
-            messageEmbed = buildEmbed(unitDataRSS);
+            messageEmbed = buildEmbed(unitDataRSS,type);
             for(FileData fileData : fileDataList){
                 priorityGuildData.clear();
                 for(PriorityData pd : priorityList){
@@ -57,14 +57,16 @@ public class LumRSSService {
         }
     }
 
-    private static MessageEmbed buildEmbed(DataRSS data){
+    private static MessageEmbed buildEmbed(DataRSS data,TypeRSS type){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle(data.getTitle());
         eb.setDescription("Data de Lançamento: " + data.getPubDate().format(dtf));
         eb.setImage(data.getMedia());
         eb.setColor(new Color(50, 210, 69));
-        eb.setFooter("AnimeID: "+data.getUrl().substring(31));
+        if(type == TypeRSS.AIRING){
+            eb.setFooter("AnimeID: "+data.getUrl().substring(31));
+        }
         return eb.build();
     }
 
