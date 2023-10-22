@@ -45,7 +45,7 @@ public class FileData {
     public void sendMessage(JDA jda, MessageEmbed messageEmbed, List<Button> buttonList,List<PriorityData> pds){
         TextChannel textChannel = jda.getTextChannelById(textChatId);
         StringBuilder stringBuilder = new StringBuilder();
-        if(textChannel != null){
+        if((textChannel != null) && (textChannel.canTalk())){
             for(PriorityData pd : pds){
                 stringBuilder.append(pd.getUserMentioned()+" ");
             }
