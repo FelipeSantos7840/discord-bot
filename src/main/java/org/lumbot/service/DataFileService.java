@@ -15,7 +15,7 @@ import java.util.List;
 public class DataFileService extends FileManager {
 
     public static void setDefaultChat(Guild guild, TextChannel textChannel,String pathChatGuilds) throws IOException{
-        String botID = "1160392363240341606";
+        String botID = "1163516372651872307";
         boolean haveDeniedPerm = verifyAllPermission(textChannel, guild.getMemberById(botID),false);
         if(haveDeniedPerm){
             boolean haveAllowedPerm = verifyAllPermission(textChannel, guild.getMemberById(botID),true);
@@ -47,6 +47,11 @@ public class DataFileService extends FileManager {
             if(!isAllowed){
                 throw new IllegalStateException("O Bot não possui as permissões necessarias(Enviar Link e Enviar Menssagem)");
             }
+            return true;
+        }
+        permission = returnPermissions(textChannel,textChannel.getGuild().getPublicRole(),isAllowed);
+        verify = verifyPermission(permission,isAllowed);
+        if(verify && !isAllowed){
             return true;
         }
         for(int x=0; x<mb.getRoles().size();x++){
