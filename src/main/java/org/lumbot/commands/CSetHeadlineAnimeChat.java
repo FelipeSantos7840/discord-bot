@@ -21,6 +21,8 @@ public class CSetHeadlineAnimeChat extends ConfigCommands {
                 interactionHook.editOriginal("Chat Configurado!!").queue();
             } catch (IOException e){
                 event.reply("Erro na Configuração do Chat contate o Suporte!").setEphemeral(true).queue();
+            } catch (IllegalStateException e){
+                event.reply("Error: " + e.getMessage()).queue();
             }
         }
     }

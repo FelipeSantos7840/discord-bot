@@ -1,8 +1,9 @@
 package org.lumbot.service;
 
-import com.rometools.utils.IO;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.IPermissionHolder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.lumbot.collector.TypeRSS;
 
@@ -14,6 +15,13 @@ import java.util.List;
 public class DataFileService extends FileManager {
 
     public static void setDefaultChat(Guild guild, TextChannel textChannel,String pathChatGuilds) throws IOException{
+        boolean haveDeniedPerm = verifyAllPermission(textChannel, guild.getMemberById("1163516372651872307"),false);
+        if(haveDeniedPerm){
+            boolean haveAllowedPerm = verifyAllPermission(textChannel, guild.getMemberById("1163516372651872307"),true);
+            if(!haveAllowedPerm){
+                throw new IllegalStateException("O Bot não possui as permissões necessarias(Enviar Link e Enviar Menssagem)");
+            }
+        }
         FileData updateDate = new FileData(guild.getId(),textChannel.getId());
         verifyFile(pathChatGuilds);
         List<FileData> listFileData = readGuildChats(pathChatGuilds);
@@ -28,6 +36,63 @@ public class DataFileService extends FileManager {
         }else{
             appendGuildChats(guild, textChannel, pathChatGuilds);
         }
+    }
+    private static boolean verifyAllPermission(TextChannel textChannel,Member mb,boolean isAllowed){
+        Long permission;
+        boolean verify;
+        permission = returnPermissions(textChannel,mb,isAllowed);
+        verify = verifyPermission(permission,isAllowed);
+        if(verify){
+            if(!isAllowed){
+                throw new IllegalStateException("O Bot não possui as permissões necessarias(Enviar Link e Enviar Menssagem)");
+            }
+            return true;
+        }
+        for(int x=0; x<mb.getRoles().size();x++){
+            permission = returnPermissions(textChannel,mb.getRoles().get(x),isAllowed);
+            verify = verifyPermission(permission,isAllowed);
+            if(verify){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Long returnPermissions(TextChannel textChannel, IPermissionHolder ph,boolean isAllowed){
+        Long permission;
+        try {
+            if(isAllowed){
+                permission = textChannel.getPermissionOverride(ph).getAllowedRaw();
+            } else {
+                permission = textChannel.getPermissionOverride(ph).getDeniedRaw();
+            }
+        } catch (NullPointerException e){
+            permission = null;
+        }
+        return permission;
+    }
+
+    private static Long returnPermissions(TextChannel textChannel, IPermissionHolder ph){
+        return returnPermissions(textChannel,ph,true);
+    }
+
+    private static boolean verifyPermission(Long permission,boolean isAllowed){
+        boolean verifyPermission = false;
+        if(permission != null){
+            if(isAllowed) {
+                if ((permission & Permission.MESSAGE_SEND.getRawValue()) != 0
+                        && (permission & Permission.MESSAGE_EMBED_LINKS.getRawValue()) != 0) {
+                    verifyPermission = true;
+                }
+            } else {
+                if ((permission & Permission.MESSAGE_SEND.getRawValue()) != 0
+                        || (permission & Permission.MESSAGE_EMBED_LINKS.getRawValue()) != 0) {
+                    verifyPermission = true;
+                }
+            }
+
+        }
+        return verifyPermission;
     }
 
     public static List<FileData> readGuildChats(String pathChatGuilds){
